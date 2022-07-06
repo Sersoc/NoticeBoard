@@ -9,6 +9,19 @@
       Title="MainPage">
 
     <Grid>
-        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Button Width="200" Height="80" Click="Button_Click_1" Content="PostPage"></Button>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Button Width="200" Height="80" Click="Button_Click_2" Content="WritePage"></Button>
+            </Grid>
+            <Frame NavigationUIVisibility="Hidden"/>
+        </Grid>
     </Grid>
 </Page>

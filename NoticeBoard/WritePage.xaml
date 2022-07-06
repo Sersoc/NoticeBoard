@@ -9,6 +9,16 @@
       Title="WritePage">
 
     <Grid>
-        
+        <TextBlock x:Name="Title" HorizontalAlignment="Left" Height="21" Margin="42,29,0,0" TextWrapping="Wrap" Text="제목" VerticalAlignment="Top" Width="111"/>
+        <TextBlock x:Name="Password" HorizontalAlignment="Left" Height="21" Margin="390,29,0,0" TextWrapping="Wrap" Text="비밀번호" VerticalAlignment="Top" Width="119"/>
+        <TextBlock x:Name="Writer" HorizontalAlignment="Left" Height="23" Margin="42,98,0,0" TextWrapping="Wrap" Text="작성자" VerticalAlignment="Top" Width="143"/>
+        <TextBox x:Name="tbxTitle" HorizontalAlignment="Left" Height="22" Margin="42,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="195"/>
+        <TextBox x:Name="tbxPassword" HorizontalAlignment="Left" Height="22" Margin="390,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="241"/>
+        <TextBox x:Name="tbxWriter" HorizontalAlignment="Left" Height="17" Margin="42,126,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="195"/>
+        <TextBox x:Name="tbxMainText" HorizontalAlignment="Left" Height="171" Margin="42,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="589"/>
+        <TextBlock x:Name="MainText" HorizontalAlignment="Left" Height="17" Margin="42,162,0,0" TextWrapping="Wrap" Text="내용" VerticalAlignment="Top" Width="111"/>
+        <Button x:Name="btnUpload" Content="등록" HorizontalAlignment="Left" Height="19" Margin="419,367,0,0" VerticalAlignment="Top" Width="100" Click="UploadClick"/>
+        <Button x:Name="btnCancle" Content="취소" HorizontalAlignment="Left" Height="19" Margin="529,367,0,0" VerticalAlignment="Top" Width="100" Click="CancleClick"/>
+
     </Grid>
 </Page>

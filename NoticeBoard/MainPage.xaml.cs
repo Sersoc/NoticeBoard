@@ -24,5 +24,17 @@ namespace NoticeBoard
         {
             InitializeComponent();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Uri uri = new Uri("/PostPage.xaml", UriKind.Relative);
+            NavigationService.Navigate(uri);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Uri uri = new Uri("/WritePage.xaml", UriKind.Relative);
+            NavigationService.Navigate(uri);
+        }
     }
 }

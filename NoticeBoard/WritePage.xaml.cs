@@ -24,5 +24,16 @@ namespace NoticeBoard
         {
             InitializeComponent();
         }
+
+        private void CancleClick(object sender, RoutedEventArgs e)
+        {
+            Uri uri = new Uri("/MainPage.xaml", UriKind.Relative);
+            NavigationService.Navigate(uri);
+        }
+
+        private void UploadClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
