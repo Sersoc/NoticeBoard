@@ -1,1 +1,1 @@
-<h4>NoticeBoard</h4>
+<h1>NoticeBoard</h1>
