@@ -9,13 +9,15 @@
       Title="PostPage">
     <Grid>
         <TextBlock x:Name="Title" HorizontalAlignment="Left" Height="21" Margin="42,29,0,0" TextWrapping="Wrap" Text="제목" VerticalAlignment="Top" Width="111"/>
-        <TextBlock x:Name="DateTime" HorizontalAlignment="Left" Height="21" Margin="366,96,0,0" TextWrapping="Wrap" Text="작성일" VerticalAlignment="Top" Width="119"/>
+        <TextBlock x:Name="DateTime" HorizontalAlignment="Left" Height="21" Margin="366,96,0,0" TextWrapping="Wrap" Text="작성일" VerticalAlignment="Top" Width="265"/>
         <TextBlock x:Name="Writer" HorizontalAlignment="Left" Height="23" Margin="42,98,0,0" TextWrapping="Wrap" Text="작성자" VerticalAlignment="Top" Width="143"/>
         <TextBox x:Name="tbxMainText" HorizontalAlignment="Left" Height="170" Margin="42,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="589" IsReadOnly="True"/>
         <Button x:Name="btnDelete" Content="삭제" HorizontalAlignment="Left" Height="19" Margin="421,334,0,0" VerticalAlignment="Top" Width="100" Click="DeleteClick" Background="White"/>
         <Button x:Name="btnCorrection" Content="수정" HorizontalAlignment="Left" Height="19" Margin="531,334,0,0" VerticalAlignment="Top" Width="100" Click="CorrectionClick" Background="White"/>
         <Button x:Name="btnBack" Content="뒤로" HorizontalAlignment="Left" Height="30" Margin="545,24,0,0" VerticalAlignment="Top" Width="86" Background="White" Click="btnBack_Click"/>
         <TextBox x:Name="tbxPassword" HorizontalAlignment="Left" Height="19" Margin="286,334,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="104"/>
+        <TextBox x:Name="tbxNo" HorizontalAlignment="Left" Height="26" Margin="286,29,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129"/>
+        <Button x:Name="btnFind" Content="검색" HorizontalAlignment="Left" Height="26" Margin="444,29,0,0" VerticalAlignment="Top" Width="65" Click="btnFind_Click"/>
 
     </Grid>
 </Page>
