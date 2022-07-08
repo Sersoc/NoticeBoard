@@ -1,22 +1,14 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using log4net;
 namespace NoticeBoard
 {
-    
+    /// <summary>
+    /// 게시물 페이지
+    /// </summary>
     public partial class PostPage : Page
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(WritePage));
@@ -26,9 +18,7 @@ namespace NoticeBoard
         bool correction = false;
         public PostPage()
         {
-
             InitializeComponent();
-            System.Diagnostics.Trace.WriteLine("hi");
             Log.Info("=========start PostPage===========");
         }
 
@@ -40,32 +30,35 @@ namespace NoticeBoard
 
         private void DeleteClick(object sender, RoutedEventArgs e)
         {
-            if (password == tbxPassword.Text)
+            if (password == tbxPassword.Password)
             {
+                //DELETE query
                 DbConnect(($"DELETE FROM writedb WHERE bno = {index}"));
-                Log.Info($"=========DELETE {index}column===========");
+                Log.Info($"=========DELETE bno {index} column===========");
             }
         }
 
         private void CorrectionClick(object sender, RoutedEventArgs e)
         {
 
-            if (password == tbxPassword.Text && correction == false)
+            if (password == tbxPassword.Password && correction == false)
             {
                 tbxMainText.IsReadOnly = false;
                 correction = true;
 
             }
-            else if (password == tbxPassword.Text && correction == true)
+            else if (password == tbxPassword.Password && correction == true)
             {
-                DbConnect(($"UPDATE  writedb SET content = '{tbxMainText.Text}'"));
-                Log.Info($"=========UPDATE {index}column===========");
+                //UPDATE query
+                DbConnect(($"UPDATE  writedb SET content = '{tbxMainText.Text}' where bno = {index}"));
+                Log.Info($"=========UPDATE bno {index} column===========");
                 tbxMainText.IsReadOnly = true;
                 correction = false;
             }
         }
         private void DbConnect(string dbCmd)
         {
+            //DB로 query문 전송
             MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             MySqlCommand cmd = new MySqlCommand(dbCmd, conn);
@@ -74,11 +67,12 @@ namespace NoticeBoard
 
         private void btnFind_Click(object sender, RoutedEventArgs e)
         {
+            //DB table에서 데이터 불러오기
             using (MySqlConnection conn = new MySqlConnection(connStr))
             {
                 index = Convert.ToInt32(tbxNo.Text);
                 conn.Open();
-                string sql = $"SELECT * FROM writedb WHERE bno = {index}";
+                string sql = $"SELECT title,writer,content,password,writetime FROM writedb WHERE bno = {index}";
 
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader dr = cmd.ExecuteReader();
@@ -91,7 +85,7 @@ namespace NoticeBoard
                     tbDateTime.Text = "작성일 " + dr["writetime"].ToString();
                 }
                 dr.Close();
-                Log.Info($"=========SELECT {index}column===========");
+                Log.Info($"=========SELECT bno {index} column===========");
             }
         }
 

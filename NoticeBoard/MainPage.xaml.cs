@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace NoticeBoard
 {
     /// <summary>
-    /// MainPage.xaml에 대한 상호 작용 논리
+    /// test용 MainPage
     /// </summary>
     public partial class MainPage : Page
     {

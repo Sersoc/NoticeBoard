@@ -17,7 +17,7 @@ using log4net;
 namespace NoticeBoard
 {
     /// <summary>
-    /// WritePage.xaml에 대한 상호 작용 논리
+    /// 글 작성 페이지
     /// </summary>
     public partial class WritePage : Page
     {
@@ -37,12 +37,13 @@ namespace NoticeBoard
         
         private void UploadClick(object sender, RoutedEventArgs e)
         {
+            if (tbxPassword.Password==tbxPasswordCheck.Password) { 
             //DB연결 정보 저장
             string connStr = "Server=localhost;Database=test;Uid=root;Pwd=P@ssw0rd!@#$;";
             MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             //sql문(INSERT)
-            string dbCmd = ($"INSERT INTO writedb (writer,password,title,content) VALUES ('{tbxWriter.Text}','{tbxPassword.Text}', '{tbxTitle.Text}', '{tbxMainText.Text}')" );
+            string dbCmd = ($"INSERT INTO writedb (writer,password,title,content) VALUES ('{tbxWriter.Text}','{tbxPassword.Password}', '{tbxTitle.Text}', '{tbxMainText.Text}')" );
             //sql문 실행
             MySqlCommand cmd = new MySqlCommand(dbCmd, conn);
             //쿼리 실행
@@ -50,6 +51,11 @@ namespace NoticeBoard
             Log.Info("=========INSERT Content===========");
             Uri uri = new Uri("/MainPage.xaml", UriKind.Relative);
             NavigationService.Navigate(uri);
+            }
+            else
+            {
+                tbPasswordCheck.Visibility = Visibility.Visible;
+            }
 
         }
 

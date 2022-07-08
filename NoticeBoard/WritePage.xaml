@@ -21,12 +21,15 @@
         <TextBlock Grid.Row ="0" Grid.Column="1" x:Name="Password" HorizontalAlignment="Left" Height="21" Margin="12,26,0,0" TextWrapping="Wrap" Text="비밀번호" VerticalAlignment="Top" Width="118"/>
         <TextBlock Grid.Row ="0" Grid.Column="0" x:Name="Writer" HorizontalAlignment="Left" Height="23" Margin="42,98,0,0" TextWrapping="Wrap" Text="작성자" VerticalAlignment="Top" Width="143"/>
         <TextBox Grid.Row ="0" Grid.Column="0" x:Name="tbxTitle" HorizontalAlignment="Left" Height="22" Margin="42,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="195"/>
-        <TextBox Grid.Row="0" x:Name="tbxPassword" HorizontalAlignment="Left" Height="22" Margin="10,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" Grid.Column="1"/>
+        <PasswordBox PasswordChar="X" Grid.Row="0" x:Name="tbxPassword" HorizontalAlignment="Left" Height="22" Margin="10,55,0,0"  VerticalAlignment="Top" Width="241" Grid.Column="1" Password=""/>
         <TextBox Grid.Row ="0" Grid.Column="0" x:Name="tbxWriter" HorizontalAlignment="Left" Height="22" Margin="42,126,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="195"/>
         <TextBox Grid.Row ="1" x:Name="tbxMainText" HorizontalAlignment="Left" Height="171" Margin="42,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="644" Grid.ColumnSpan="2" />
         <TextBlock Grid.Row ="1" Grid.Column="0" x:Name="MainText" HorizontalAlignment="Left" Height="17" Margin="42,5,0,0" TextWrapping="Wrap" Text="내용" VerticalAlignment="Top" Width="111"/>
         <Button Grid.Row ="1" Grid.Column="1" x:Name="btnUpload" Content="등록" HorizontalAlignment="Left" Height="19" Margin="68,225,0,0" VerticalAlignment="Top" Width="100" Click="UploadClick" />
         <Button Grid.Row ="1" Grid.Column="1" x:Name="btnCancle" Content="취소" HorizontalAlignment="Left" Height="19" Margin="186,225,0,0" VerticalAlignment="Top" Width="100" Click="CancleClick" />
+        <TextBlock Grid.Row ="0" Grid.Column="1" x:Name="Password_Copy" HorizontalAlignment="Left" Height="21" Margin="12,103,0,0" TextWrapping="Wrap" Text="비밀번호 확인" VerticalAlignment="Top" Width="118"/>
+        <PasswordBox PasswordChar="X" x:Name="tbxPasswordCheck" HorizontalAlignment="Left" Height="22" Margin="10,132,0,0"  VerticalAlignment="Top" Width="241" Grid.Column="1" Password=""/>
+        <TextBlock x:Name="tbPasswordCheck" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="12,5,0,0" Grid.Row="1" TextWrapping="Wrap" Text="비밀번호가 맞지 않습니다." VerticalAlignment="Top" Width="239" Foreground="Red" Visibility="Hidden"/>
 
     </Grid>
 </Page>
