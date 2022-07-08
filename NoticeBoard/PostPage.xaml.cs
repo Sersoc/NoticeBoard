@@ -13,13 +13,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using log4net;
 namespace NoticeBoard
 {
-
+    
     public partial class PostPage : Page
     {
-
+        private static readonly ILog Log = LogManager.GetLogger(typeof(WritePage));
         int index;
         string connStr = "Server=localhost;Database=test;Uid=root;Pwd=P@ssw0rd!@#$;";
         string password;
@@ -28,7 +28,8 @@ namespace NoticeBoard
         {
 
             InitializeComponent();
-
+            System.Diagnostics.Trace.WriteLine("hi");
+            Log.Info("=========start PostPage===========");
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -39,25 +40,26 @@ namespace NoticeBoard
 
         private void DeleteClick(object sender, RoutedEventArgs e)
         {
-            if (password == tbxPassword.Text && index != null)
+            if (password == tbxPassword.Text)
             {
-                DbConnect(($"DELETE FROM post WHERE bno = {index}"));
-              
+                DbConnect(($"DELETE FROM writedb WHERE bno = {index}"));
+                Log.Info($"=========DELETE {index}column===========");
             }
         }
 
         private void CorrectionClick(object sender, RoutedEventArgs e)
         {
-            
+
             if (password == tbxPassword.Text && correction == false)
             {
                 tbxMainText.IsReadOnly = false;
                 correction = true;
 
             }
-            else if(password == tbxPassword.Text && correction == true)
+            else if (password == tbxPassword.Text && correction == true)
             {
-                DbConnect(($"UPDATE  post SET maintext = '{tbxMainText.Text}'"));
+                DbConnect(($"UPDATE  writedb SET content = '{tbxMainText.Text}'"));
+                Log.Info($"=========UPDATE {index}column===========");
                 tbxMainText.IsReadOnly = true;
                 correction = false;
             }
@@ -76,20 +78,22 @@ namespace NoticeBoard
             {
                 index = Convert.ToInt32(tbxNo.Text);
                 conn.Open();
-                string sql = $"SELECT * FROM post WHERE bno = {index}";
+                string sql = $"SELECT * FROM writedb WHERE bno = {index}";
 
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
                 {
-                    Title.Text = rdr["title"].ToString();
-                    Writer.Text = rdr["writer"].ToString();
-                    tbxMainText.Text = rdr["maintext"].ToString();
-                    password = rdr["pasw"].ToString();
-                    DateTime.Text = "작성일 " + rdr["writetime"].ToString();
+                    tbTitle.Text = dr["title"].ToString();
+                    tbWriter.Text = dr["writer"].ToString();
+                    tbxMainText.Text = dr["content"].ToString();
+                    password = dr["password"].ToString();
+                    tbDateTime.Text = "작성일 " + dr["writetime"].ToString();
                 }
-                rdr.Close();
+                dr.Close();
+                Log.Info($"=========SELECT {index}column===========");
             }
         }
+
     }
 }

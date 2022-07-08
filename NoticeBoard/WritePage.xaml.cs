@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using log4net;
 namespace NoticeBoard
 {
     /// <summary>
@@ -21,10 +22,11 @@ namespace NoticeBoard
     public partial class WritePage : Page
     {
     
+        private static readonly ILog Log = LogManager.GetLogger(typeof(WritePage));
         public WritePage()
         {
             InitializeComponent();
-                  
+            Log.Info("=========start WritePage===========");     
         }
 
         private void CancleClick(object sender, RoutedEventArgs e)
@@ -35,17 +37,17 @@ namespace NoticeBoard
         
         private void UploadClick(object sender, RoutedEventArgs e)
         {
-
+            //DB연결 정보 저장
             string connStr = "Server=localhost;Database=test;Uid=root;Pwd=P@ssw0rd!@#$;";
             MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
-            int index = 0;
-            MySqlCommand ina = new MySqlCommand("SELECT COUNT(*) FROM post", conn);
-            string dbCmd = ($"INSERT INTO post VALUES ('{tbxMainText.Text}', '{tbxPassword.Text}', '{tbxTitle.Text}', '{tbxWriter.Text}','{index}'," +
-                $"'{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}')");
+            //sql문(INSERT)
+            string dbCmd = ($"INSERT INTO writedb (writer,password,title,content) VALUES ('{tbxWriter.Text}','{tbxPassword.Text}', '{tbxTitle.Text}', '{tbxMainText.Text}')" );
+            //sql문 실행
             MySqlCommand cmd = new MySqlCommand(dbCmd, conn);
+            //쿼리 실행
             cmd.ExecuteNonQuery();
-            
+            Log.Info("=========INSERT Content===========");
             Uri uri = new Uri("/MainPage.xaml", UriKind.Relative);
             NavigationService.Navigate(uri);
 
