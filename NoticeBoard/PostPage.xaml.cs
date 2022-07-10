@@ -13,7 +13,7 @@ namespace NoticeBoard
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(WritePage));
         int index;
-        string connStr = "Server=localhost;Database=test;Uid=root;Pwd=P@ssw0rd!@#$;";
+        string connStr = "Server=192.168.0.102, Port:3306;Database=board;Uid=dwsmartict;Pwd=P@ssw0rd!@#$;";
         string password;
         bool correction = false;
         public PostPage()
@@ -72,7 +72,7 @@ namespace NoticeBoard
             {
                 index = Convert.ToInt32(tbxNo.Text);
                 conn.Open();
-                string sql = $"SELECT title,writer,content,password,writetime FROM writedb WHERE bno = {index}";
+                string sql = $"SELECT title,writer,content,password,writertime FROM writedb WHERE bno = {index}";
 
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader dr = cmd.ExecuteReader();
@@ -82,7 +82,7 @@ namespace NoticeBoard
                     tbWriter.Text = dr["writer"].ToString();
                     tbxMainText.Text = dr["content"].ToString();
                     password = dr["password"].ToString();
-                    tbDateTime.Text = "작성일 " + dr["writetime"].ToString();
+                    tbDateTime.Text = "작성일 " + dr["writertime"].ToString();
                 }
                 dr.Close();
                 Log.Info($"=========SELECT bno {index} column===========");

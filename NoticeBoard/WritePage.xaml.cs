@@ -39,7 +39,7 @@ namespace NoticeBoard
         {
             if (tbxPassword.Password==tbxPasswordCheck.Password) { 
             //DB연결 정보 저장
-            string connStr = "Server=localhost;Database=test;Uid=root;Pwd=P@ssw0rd!@#$;";
+            string connStr = "Server=192.168.0.102,Port:3306;Database=board;Uid=dwsmartict;Pwd=P@ssw0rd!@#$;";
             MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             //sql문(INSERT)
