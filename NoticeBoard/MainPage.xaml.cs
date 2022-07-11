@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,17 +14,16 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using MySql.Data.MySqlClient;
+using System.Data;
 
-#pragma warning disable CS8600
-
-namespace WpfAppBoard
+namespace NoticeBoard
 {
     /// <summary>
     /// MainPage.xaml에 대한 상호 작용 논리
     /// </summary>
     public partial class MainPage : Page
     {
-        string connectionString = $"SERVER=localhost;DATABASE=board;UID=root;PASSWORD=1234;Allow User Variables=True";
+        string connectionString = $"Server=192.168.0.102,Port:3306;Database=board;Uid=dwsmartict;Pwd=P@ssw0rd!@#$;Allow User Variables=True";
         int listCnt = 0; //전체 row 개수를 10으로 나누어 page가 몇개인지 저장
         int curPageNum = 1; // 현재 페이지
         int totalPageBatchCnt = 0; //전체 페이지를 5개로 묶은 갯수 저장
@@ -271,7 +269,7 @@ namespace WpfAppBoard
             else
                 ShowList();
         }
-        
+
         private void ShowFindList()
         {
             string sql;
@@ -281,7 +279,7 @@ namespace WpfAppBoard
                 try
                 {
                     connection.Open();
-                    if(cbxFindMode.Text == "작성자")
+                    if (cbxFindMode.Text == "작성자")
                         sql = $"select (@num:=@num+1) as no, title, writer, writertime, bno from writedb, (select @num:={curPageNum * 10 - 10}) t where writer='{findString}' order by bno limit 10 offset {Convert.ToString(curPageNum * 10 - 10)}";
                     else
                         sql = $"select (@num:=@num+1) as no, title, writer, writertime, bno from writedb, (select @num:={curPageNum * 10 - 10}) t where title like '%{findString}%' order by bno limit 10 offset {Convert.ToString(curPageNum * 10 - 10)}";
@@ -291,7 +289,7 @@ namespace WpfAppBoard
                     adapter.Fill(ds, "DataBinding");
                     dgTable.DataContext = ds;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     MessageBox.Show("ShowFindList");
                     return;
@@ -316,7 +314,7 @@ namespace WpfAppBoard
                     MySqlCommand command = new MySqlCommand(sql, connection);
                     return Convert.ToInt32(command.ExecuteScalar());
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     MessageBox.Show(e.Message);
                     return -1;
@@ -405,9 +403,9 @@ namespace WpfAppBoard
         {
             DataRowView drv = (DataRowView)dgTable.SelectedItem;
 
-            PostPage testPage = new PostPage(Convert.ToInt32(drv.Row[4]));
+            PostPage PostPage = new PostPage(Convert.ToInt32(drv.Row[4]));
 
-            NavigationService.Navigate(testPage);
+            NavigationService.Navigate(PostPage);
         }
 
         /// <summary>

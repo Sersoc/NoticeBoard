@@ -20,8 +20,6 @@
         <Button x:Name="btnCorrection" Content="수정" HorizontalAlignment="Left" Height="19" Margin="531,203,0,0" VerticalAlignment="Top" Width="100" Click="CorrectionClick" Background="White" Grid.Row="1"/>
         <Button x:Name="btnBack" Content="뒤로" HorizontalAlignment="Left" Height="30" Margin="545,27,0,0" VerticalAlignment="Top" Width="86" Background="White" Click="btnBack_Click"/>
         <PasswordBox x:Name="tbxPassword" HorizontalAlignment="Left" Height="18" Margin="296,204,0,0" PasswordChar="X" Password="" VerticalAlignment="Top" Width="104" Grid.Row="1"/>
-        <TextBox x:Name="tbxNo" HorizontalAlignment="Left" Height="26" Margin="286,29,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129"/>
-        <Button x:Name="btnFind" Content="검색" HorizontalAlignment="Left" Height="26" Margin="444,29,0,0" VerticalAlignment="Top" Width="65" Click="btnFind_Click"/>
 
     </Grid>
 </Page>

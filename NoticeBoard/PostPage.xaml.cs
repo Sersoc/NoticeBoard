@@ -21,6 +21,31 @@ namespace NoticeBoard
             InitializeComponent();
             Log.Info("=========start PostPage===========");
         }
+        public PostPage(int index)
+        {
+
+            InitializeComponent();
+            Log.Info("=========start PostPage===========");
+            //DB table에서 데이터 불러오기
+            using (MySqlConnection conn = new MySqlConnection(connStr))
+            {
+                conn.Open();
+                string sql = $"SELECT title,writer,content,password,writertime FROM writedb WHERE bno = {index}";
+
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    tbTitle.Text = dr["title"].ToString();
+                    tbWriter.Text = dr["writer"].ToString();
+                    tbxMainText.Text = dr["content"].ToString();
+                    password = dr["password"].ToString();
+                    tbDateTime.Text = "작성일 " + dr["writertime"].ToString();
+                }
+                dr.Close();
+                Log.Info($"=========SELECT bno {index} column===========");
+            }
+        }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
@@ -65,29 +90,7 @@ namespace NoticeBoard
             cmd.ExecuteNonQuery();
         }
 
-        private void btnFind_Click(object sender, RoutedEventArgs e)
-        {
-            //DB table에서 데이터 불러오기
-            using (MySqlConnection conn = new MySqlConnection(connStr))
-            {
-                index = Convert.ToInt32(tbxNo.Text);
-                conn.Open();
-                string sql = $"SELECT title,writer,content,password,writertime FROM writedb WHERE bno = {index}";
 
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    tbTitle.Text = dr["title"].ToString();
-                    tbWriter.Text = dr["writer"].ToString();
-                    tbxMainText.Text = dr["content"].ToString();
-                    password = dr["password"].ToString();
-                    tbDateTime.Text = "작성일 " + dr["writertime"].ToString();
-                }
-                dr.Close();
-                Log.Info($"=========SELECT bno {index} column===========");
-            }
-        }
 
     }
 }
